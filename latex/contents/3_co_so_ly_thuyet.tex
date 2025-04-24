@@ -1,0 +1,104 @@
+\section{Cơ sở lý thuyết}
+\subsection{ Các yếu tố ảnh hưởng đến giá nông sản}
+
+Giá nông sản là một biến số nhạy cảm, chịu ảnh hưởng bởi nhiều yếu tố phức tạp từ cả phía cung và cầu. Việc hiểu rõ các yếu tố này không chỉ giúp phân tích chính xác mà còn là nền tảng để xây dựng các mô hình dự đoán hiệu quả. Một số yếu tố chủ yếu bao gồm:
+
+\begin{itemize}
+    \item \textbf{Thời tiết và khí hậu:} Nhiệt độ, lượng mưa, hạn hán, lũ lụt và các hiện tượng thời tiết cực đoan ảnh hưởng trực tiếp đến năng suất và chất lượng cây trồng.
+    
+    \item \textbf{Dịch bệnh và sâu bệnh:} Sự bùng phát của sâu bệnh làm giảm sản lượng và chất lượng nông sản, từ đó đẩy giá thành lên cao.
+
+    \item \textbf{Chi phí đầu vào:} Bao gồm giá giống cây trồng, phân bón, nhân công và đặc biệt là \textbf{thuốc trừ sâu}. Việc sử dụng thuốc trừ sâu không chỉ ảnh hưởng đến chi phí sản xuất mà còn tác động đến chất lượng sản phẩm, từ đó ảnh hưởng đến giá cả.
+
+    \item \textbf{Chính sách nhà nước:} Các chính sách về thuế, trợ cấp, khuyến khích sản xuất hoặc hạn chế xuất khẩu cũng ảnh hưởng lớn đến giá nông sản.
+
+    \item \textbf{Quan hệ cung - cầu thị trường:} Khi sản lượng vượt cầu, giá sẽ giảm; ngược lại khi nguồn cung hạn chế, giá có xu hướng tăng.
+
+    \item \textbf{Tác động từ thị trường quốc tế:} Biến động giá cả toàn cầu, tỉ giá hối đoái và tình hình xuất nhập khẩu đều tác động đến giá nông sản trong nước.
+\end{itemize}
+
+Những yếu tố này thường có mối quan hệ phức tạp và phi tuyến tính với giá nông sản, khiến cho việc phân tích và dự đoán trở thành một bài toán đầy thách thức nhưng cũng rất cần thiết và có tính ứng dụng cao trong thực tiễn.
+
+
+\subsection{ Tổng quan về học máy và phân lớp dữ liệu}
+
+Học máy (\textit{Machine Learning}) là một nhánh của trí tuệ nhân tạo (AI), cho phép máy tính học từ dữ liệu và cải thiện hiệu suất dự đoán mà không cần lập trình một cách cụ thể. Trong bối cảnh dự đoán giá nông sản, học máy đóng vai trò quan trọng trong việc xây dựng các mô hình có khả năng khai thác các mối quan hệ phức tạp giữa nhiều yếu tố ảnh hưởng khác nhau.
+
+Học máy được chia thành nhiều loại, trong đó phổ biến nhất là:
+\begin{itemize}
+    \item \textbf{Học có giám sát (Supervised Learning):} Mô hình được huấn luyện trên tập dữ liệu có nhãn, tức là mỗi mẫu dữ liệu đều đi kèm với kết quả đầu ra mong muốn. Đây là phương pháp chính được sử dụng trong bài toán dự đoán giá nông sản.
+    
+    \item \textbf{Học không giám sát (Unsupervised Learning):} Tập trung vào việc tìm kiếm cấu trúc ẩn trong dữ liệu không có nhãn (ví dụ: phân cụm).
+    
+    \item \textbf{Học tăng cường (Reinforcement Learning):} Mô hình học thông qua tương tác với môi trường và tối ưu hóa phần thưởng.
+\end{itemize}
+
+Trong khuôn khổ đồ án này, bài toán chính được xác định là một bài toán \textbf{hồi quy}, trong đó đầu ra cần dự đoán là một giá trị liên tục (giá nông sản). Tuy nhiên, cũng có thể tiếp cận dưới dạng \textbf{phân lớp} nếu ta chia giá thành các mức giá cụ thể như “thấp”, “trung bình” và “cao”.
+
+Các thuật toán học máy thường được sử dụng trong phân tích và dự đoán dữ liệu gồm có: hồi quy tuyến tính, cây quyết định, xác suất Bayes (Naive Bayes), mạng nơ-ron nhân tạo và K-nearest neighbors (KNN). Mỗi thuật toán có đặc điểm riêng phù hợp với từng kiểu dữ liệu và yêu cầu dự đoán khác nhau, sẽ được trình bày cụ thể ở phần tiếp theo.
+
+
+\subsection{ Các thuật toán học máy}
+
+Trong quá trình xây dựng mô hình dự đoán giá nông sản, việc lựa chọn thuật toán phù hợp là yếu tố then chốt để đảm bảo độ chính xác và khả năng tổng quát hóa của mô hình. Dưới đây là các thuật toán phổ biến được sử dụng trong bài toán dự đoán giá trị liên tục hoặc phân lớp giá trị.
+
+\subsubsection{ Hồi quy tuyến tính (Linear Regression)}
+
+Hồi quy tuyến tính là một trong những mô hình cơ bản nhất trong học máy, được sử dụng rộng rãi trong các bài toán dự đoán. Mục tiêu của hồi quy tuyến tính là tìm ra một hàm tuyến tính \( y = w_0 + w_1x_1 + w_2x_2 + \ldots + w_nx_n \) sao cho sai số giữa giá trị dự đoán và giá trị thực tế là nhỏ nhất.
+
+\begin{itemize}
+    \item \textbf{Ưu điểm:} Dễ hiểu, dễ triển khai, thời gian huấn luyện nhanh.
+    \item \textbf{Nhược điểm:} Chỉ phù hợp với các mối quan hệ tuyến tính giữa các biến; độ chính xác không cao khi dữ liệu có quan hệ phi tuyến.
+\end{itemize}
+
+\subsubsection{ Cây quyết định (Decision Tree)}
+
+Cây quyết định là mô hình dựa trên cấu trúc cây phân nhánh, trong đó mỗi nút là một điều kiện phân chia dữ liệu dựa trên giá trị của một thuộc tính, và các nhánh dẫn đến các quyết định hoặc dự đoán.
+
+\begin{itemize}
+    \item \textbf{Ưu điểm:} Dễ giải thích, không cần chuẩn hóa dữ liệu, xử lý tốt dữ liệu hỗn hợp.
+    \item \textbf{Nhược điểm:} Dễ bị overfitting nếu cây quá sâu, kém ổn định với dữ liệu nhiễu.
+\end{itemize}
+
+\subsubsection{ Naive Bayes (Xác suất Bayes ngây thơ)}
+
+Naive Bayes là mô hình phân loại dựa trên định lý Bayes, với giả định rằng các đặc trưng là độc lập với nhau (giả định “ngây thơ”). Mô hình này được tính dựa trên công thức:
+
+\[
+P(C|X) = \frac{P(X|C) \cdot P(C)}{P(X)}
+\]
+
+Trong đó:
+\begin{itemize}
+    \item \( P(C|X) \): xác suất một mẫu \( X \) thuộc về lớp \( C \)
+    \item \( P(X|C) \): xác suất quan sát thấy \( X \) nếu biết nó thuộc lớp \( C \)
+    \item \( P(C) \): xác suất xảy ra của lớp \( C \)
+    \item \( P(X) \): xác suất xảy ra của dữ liệu \( X \)
+\end{itemize}
+
+\begin{itemize}
+    \item \textbf{Ưu điểm:} Tốc độ xử lý nhanh, hiệu quả với dữ liệu lớn, dễ cài đặt.
+    \item \textbf{Nhược điểm:} Giả định độc lập giữa các đặc trưng thường không đúng trong thực tế.
+\end{itemize}
+
+\subsubsection{ Mạng nơ-ron nhân tạo (Artificial Neural Network - ANN)}
+
+Mạng nơ-ron nhân tạo là mô hình học sâu được lấy cảm hứng từ cách hoạt động của bộ não con người. Một mạng nơ-ron bao gồm các lớp (layer) gồm nhiều “nơ-ron” (neuron), được kết nối với nhau thông qua các trọng số. Dữ liệu đầu vào được truyền qua từng lớp (input, hidden, output), trải qua các hàm kích hoạt và được huấn luyện bằng cách cập nhật trọng số để giảm sai số dự đoán.
+
+\begin{itemize}
+    \item \textbf{Ưu điểm:} Khả năng mô hình hóa các mối quan hệ phi tuyến phức tạp, phù hợp với dữ liệu lớn và nhiều chiều.
+    \item \textbf{Nhược điểm:} Cần nhiều tài nguyên tính toán, dễ overfitting nếu không điều chỉnh tốt; khó giải thích kết quả so với các mô hình truyền thống.
+\end{itemize}
+
+Trong bài toán dự đoán giá nông sản, ANN đặc biệt hiệu quả khi có dữ liệu lớn, với nhiều đặc trưng đầu vào như thời tiết, phân bón, thuốc trừ sâu, v.v.
+
+\subsubsection{ K-Nearest Neighbors (KNN)}
+
+KNN là thuật toán đơn giản nhưng mạnh mẽ, dựa trên nguyên lý “gần mực thì đen, gần đèn thì sáng”. Khi cần dự đoán một điểm mới, KNN sẽ tìm \( k \) điểm dữ liệu gần nhất trong không gian đặc trưng, sau đó lấy trung bình (đối với bài toán hồi quy) hoặc đa số (đối với phân lớp) làm kết quả.
+
+\begin{itemize}
+    \item \textbf{Ưu điểm:} Dễ triển khai, không giả định phân phối dữ liệu.
+    \item \textbf{Nhược điểm:} Tốc độ chậm khi dữ liệu lớn, nhạy cảm với nhiễu và khoảng cách.
+\end{itemize}
+
+Việc lựa chọn giá trị \( k \) phù hợp là yếu tố then chốt quyết định hiệu quả của mô hình KNN.

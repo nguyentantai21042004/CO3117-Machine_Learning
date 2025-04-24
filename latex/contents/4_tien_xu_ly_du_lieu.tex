@@ -1,0 +1,361 @@
+\section{Preprocessing Data (Tiền xử lý dữ liệu)}
+
+\subsection{Giới thiệu chung về vai trò của tiền xử lý dữ liệu trong khai thác dữ liệu}
+
+\hspace{0.5cm}Trong bất kỳ dự án khai thác dữ liệu nào, tiền xử lý dữ liệu đóng vai trò quan trọng vì dữ liệu thô (\textit{raw data}) thường không đầy đủ, không chính xác, hoặc không nhất quán. Quá trình tiền xử lý giúp cải thiện chất lượng dữ liệu trước khi áp dụng các mô hình học máy và khai thác dữ liệu, từ đó giúp tăng độ chính xác của các dự đoán hoặc phân tích.
+
+\subsubsection{Mục đích của tiền xử lý dữ liệu}
+
+\hspace{0.5cm}Mục đích chính của tiền xử lý dữ liệu là làm sạch và chuẩn hóa dữ liệu, giảm thiểu nhiễu và những giá trị không hợp lệ, từ đó nâng cao chất lượng của dữ liệu. Việc này cải thiện hiệu quả của các mô hình học máy và khai thác dữ liệu, giúp các thuật toán có thể học và dự đoán chính xác hơn.
+
+\subsubsection{Quá trình tiền xử lý dữ liệu}
+
+\hspace{0.5cm}Dữ liệu thô cần được xử lý để nâng cao chất lượng: Dữ liệu thô có thể chứa các giá trị thiếu (\textit{missing values}), dữ liệu nhiễu (\textit{noisy data}), hoặc dữ liệu không nhất quán (\textit{inconsistent data}), điều này có thể làm sai lệch kết quả phân tích. Do đó, tiền xử lý dữ liệu là bước cần thiết trước khi sử dụng dữ liệu cho các mô hình học máy.
+
+\subsubsection{Các vấn đề thường gặp trong dữ liệu thô}
+
+\begin{itemize}
+    \item \textbf{Thiếu giá trị:} Nhiều thuộc tính hoặc cột trong dữ liệu có thể thiếu thông tin.
+	
+    \item \textbf{Nhiễu:} Các giá trị không hợp lý hoặc ngoại lệ (\textit{outliers}) có thể xuất hiện trong dữ liệu.
+	
+    \item \textbf{Không nhất quán:} Dữ liệu có thể được ghi nhận theo các cách khác nhau (ví dụ: định dạng ngày tháng, mã hóa giá trị).
+\end{itemize}
+
+\subsection{Ý nghĩa các trường dữ liệu}
+
+\begin{description}
+    \item[File 1: pesticides]
+
+    \begin{itemize} 
+        \item \textbf{Mô tả:} Dữ liệu này ghi nhận thông tin về việc sử dụng thuốc trừ sâu ở các quốc gia qua các năm.
+        \item \textbf{Thuộc tính:}
+        \begin{itemize}
+            \item \textbf{Domain:} Chỉ ra lĩnh vực nghiên cứu, ví dụ ``Pesticides Use'' là việc sử dụng thuốc trừ sâu.
+            \begin{itemize}
+                \item \textbf{Vai trò:} Dùng để phân loại dữ liệu theo lĩnh vực nghiên cứu, giúp xác định các thông tin cụ thể về việc sử dụng thuốc trừ sâu.
+            \end{itemize}
+            \item \textbf{Area:} Quốc gia hoặc khu vực nghiên cứu (ví dụ: Albania).
+            \begin{itemize}
+                \item \textbf{Vai trò:} Giúp phân biệt và tổ chức dữ liệu theo khu vực, hỗ trợ trong việc phân tích mối quan hệ giữa việc sử dụng thuốc trừ sâu và các yếu tố địa lý.
+            \end{itemize}
+            \item \textbf{Element:} Loại yếu tố (Use) liên quan đến dữ liệu, ví dụ ``Use'' nghĩa là số liệu về việc sử dụng thuốc.
+            \begin{itemize}
+                \item \textbf{Vai trò:} Xác định các loại yếu tố cần phân tích, giúp hiểu rõ về mục đích thu thập dữ liệu.
+            \end{itemize}
+            \item \textbf{Item:} Loại vật phẩm hoặc sản phẩm được nghiên cứu, ví dụ ``Pesticides (total)'' chỉ tổng lượng thuốc trừ sâu.
+            \begin{itemize}
+                \item \textbf{Vai trò:} Mô tả loại sản phẩm và là yếu tố quan trọng để phân tích mức độ sử dụng thuốc trừ sâu.
+            \end{itemize}
+            \item \textbf{Year:} Năm thu thập dữ liệu (ví dụ: 1990).
+            \begin{itemize}
+                \item \textbf{Vai trò:} Cung cấp thông tin theo thời gian, giúp so sánh xu hướng sử dụng thuốc trừ sâu qua các năm.
+            \end{itemize}
+            \item \textbf{Unit:} Đơn vị đo, ví dụ ``tonnes of active ingredients''.
+            \begin{itemize}
+                \item \textbf{Vai trò:} Chỉ rõ đơn vị đo lường, rất quan trọng trong việc chuẩn hóa dữ liệu để dễ dàng so sánh giữa các quốc gia hoặc các năm.
+            \end{itemize}
+            \item \textbf{Value:} Giá trị của dữ liệu, ví dụ 121 tấn thuốc trừ sâu.
+            \begin{itemize}
+                \item \textbf{Vai trò:} Đây là giá trị chính cần phân tích, có thể được sử dụng để tính toán các thống kê như trung bình, độ lệch chuẩn, v.v.
+            \end{itemize}
+        \end{itemize}
+    \end{itemize}
+
+    \item[File 2: rainfall]
+
+    \begin{itemize}
+        \item \textbf{Mô tả:} Dữ liệu về lượng mưa trung bình hàng năm tại các quốc gia.
+        \item \textbf{Thuộc tính:}
+        \begin{itemize}
+            \item \textbf{Area:} Quốc gia hoặc khu vực nghiên cứu (ví dụ: Afghanistan).
+            \begin{itemize}
+                \item \textbf{Vai trò:} Giúp phân loại dữ liệu theo khu vực và cho phép phân tích lượng mưa ở các khu vực khác nhau.
+            \end{itemize}
+            \item \textbf{Year:} Năm thu thập dữ liệu (ví dụ: 1985).
+            \begin{itemize}
+                \item \textbf{Vai trò:} Thời gian là yếu tố quan trọng để phân tích sự biến động lượng mưa qua các năm.
+            \end{itemize}
+            \item \textbf{average\_rain\_fall\_mm\_per\_year:} Lượng mưa trung bình mỗi năm tính bằng mm.
+            \begin{itemize}
+                \item \textbf{Vai trò:} Đây là giá trị quan trọng để phân tích lượng mưa trong mỗi khu vực và liên hệ với các yếu tố khác như năng suất nông sản.
+            \end{itemize}
+        \end{itemize}
+    \end{itemize}
+
+    \item[File 3: temp]
+
+    \begin{itemize}
+        \item \textbf{Mô tả:} Dữ liệu về nhiệt độ trung bình hàng năm tại các quốc gia.
+        \item \textbf{Thuộc tính:}
+        \begin{itemize}
+            \item \textbf{Year:} Năm thu thập dữ liệu (ví dụ: 1849).
+            \begin{itemize}
+                \item \textbf{Vai trò:} Giúp phân tích sự biến động của nhiệt độ qua các năm.
+            \end{itemize}
+            \item \textbf{Country:} Quốc gia nghiên cứu (ví dụ: Côte D'Ivoire).
+            \begin{itemize}
+                \item \textbf{Vai trò:} Phân loại dữ liệu theo quốc gia, hỗ trợ so sánh nhiệt độ giữa các khu vực.
+            \end{itemize}
+            \item \textbf{avg\_temp:} Nhiệt độ trung bình hàng năm (đơn vị: \textdegree C).
+            \begin{itemize}
+                \item \textbf{Vai trò:} Là giá trị chính giúp phân tích sự thay đổi nhiệt độ và mối liên hệ của nó với các yếu tố khác như năng suất cây trồng hoặc lượng mưa.
+            \end{itemize}
+        \end{itemize}
+    \end{itemize}
+
+    \item[File 4: yield\_df]
+
+    \begin{itemize}
+        \item \textbf{Mô tả:} Dữ liệu về năng suất thu hoạch, lượng mưa trung bình, và lượng thuốc trừ sâu sử dụng.
+        \item \textbf{Thuộc tính:}
+        \begin{itemize}
+            \item \textbf{Area:} Quốc gia hoặc khu vực nghiên cứu (ví dụ: Albania).
+            \begin{itemize}
+                \item \textbf{Vai trò:} Phân loại theo khu vực giúp phân tích ảnh hưởng của các yếu tố như khí hậu, thuốc trừ sâu lên năng suất.
+            \end{itemize}
+            \item \textbf{Item:} Sản phẩm hoặc cây trồng (ví dụ: Maize - Ngô).
+            \begin{itemize}
+                \item \textbf{Vai trò:} Giúp phân loại dữ liệu theo loại cây trồng và đánh giá tác động của các yếu tố khác lên từng loại sản phẩm.
+            \end{itemize}
+            \item \textbf{Year:} Năm thu thập dữ liệu (ví dụ: 1990).
+            \begin{itemize}
+                \item \textbf{Vai trò:} Cung cấp thông tin thời gian cho việc phân tích xu hướng theo năm.
+            \end{itemize}
+            \item \textbf{hg/ha\_yield:} Năng suất thu hoạch trên diện tích (đơn vị: hectogram/ha).
+            \begin{itemize}
+                \item \textbf{Vai trò:} Đây là giá trị chính cần phân tích trong việc đánh giá năng suất cây trồng theo từng khu vực.
+            \end{itemize}
+            \item \textbf{average\_rain\_fall\_mm\_per\_year:} Lượng mưa trung bình mỗi năm (đơn vị: mm).
+            \begin{itemize}
+                \item \textbf{Vai trò:} Giúp phân tích mối quan hệ giữa lượng mưa và năng suất cây trồng.
+            \end{itemize}
+            \item \textbf{pesticides\_tonnes:} Lượng thuốc trừ sâu sử dụng (đơn vị: tấn).
+            \begin{itemize}
+                \item \textbf{Vai trò:} Đánh giá tác động của việc sử dụng thuốc trừ sâu đến năng suất cây trồng.
+            \end{itemize}
+            \item \textbf{avg\_temp:} Nhiệt độ trung bình hàng năm (đơn vị: \textdegree C).
+            \begin{itemize}
+                \item \textbf{Vai trò:} Phân tích ảnh hưởng của nhiệt độ đến sự phát triển và năng suất cây trồng.
+            \end{itemize}
+        \end{itemize}
+    \end{itemize}
+
+    \item[File 5: yield]
+
+    \begin{itemize}
+        \item \textbf{Mô tả:} Dữ liệu về năng suất thu hoạch theo từng loại cây trồng qua các năm.
+        \item \textbf{Thuộc tính:}
+        \begin{itemize}
+            \item \textbf{Domain Code:} Mã lĩnh vực nghiên cứu (ví dụ: QC - Crops).
+            \begin{itemize}
+                \item \textbf{Vai trò:} Phân loại dữ liệu theo lĩnh vực nghiên cứu.
+            \end{itemize}
+            \item \textbf{Domain:} Lĩnh vực nghiên cứu (ví dụ: Crops).
+            \begin{itemize}
+                \item \textbf{Vai trò:} Xác định loại nghiên cứu chính.
+            \end{itemize}
+            \item \textbf{Area Code:} Mã khu vực (ví dụ: 2 - Afghanistan).
+            \begin{itemize}
+                \item \textbf{Vai trò:} Mã hóa thông tin khu vực nghiên cứu.
+            \end{itemize}
+            \item \textbf{Area:} Quốc gia hoặc khu vực nghiên cứu (ví dụ: Afghanistan).
+            \begin{itemize}
+                \item \textbf{Vai trò:} Phân loại dữ liệu theo khu vực địa lý.
+            \end{itemize}
+            \item \textbf{Element Code:} Mã yếu tố (ví dụ: 5419 - Yield).
+            \begin{itemize}
+                \item \textbf{Vai trò:} Mã hóa thông tin về yếu tố nghiên cứu.
+            \end{itemize}
+            \item \textbf{Element:} Yếu tố nghiên cứu (ví dụ: Yield).
+            \begin{itemize}
+                \item \textbf{Vai trò:} Xác định yếu tố chính trong phân tích.
+            \end{itemize}
+            \item \textbf{Item Code:} Mã sản phẩm (ví dụ: 56 - Maize).
+            \begin{itemize}
+                \item \textbf{Vai trò:} Mã hóa thông tin về loại cây trồng.
+            \end{itemize}
+            \item \textbf{Item:} Tên sản phẩm hoặc cây trồng (ví dụ: Maize).
+            \begin{itemize}
+                \item \textbf{Vai trò:} Phân loại dữ liệu theo loại cây trồng.
+            \end{itemize}
+            \item \textbf{Year Code:} Mã năm (ví dụ: 1961).
+            \begin{itemize}
+                \item \textbf{Vai trò:} Mã hóa thông tin về năm nghiên cứu.
+            \end{itemize}
+            \item \textbf{Year:} Năm thu thập dữ liệu (ví dụ: 1961).
+            \begin{itemize}
+                \item \textbf{Vai trò:} Phân tích dữ liệu theo thời gian.
+            \end{itemize}
+            \item \textbf{Unit:} Đơn vị đo lường (ví dụ: hg/ha).
+            \begin{itemize}
+                \item \textbf{Vai trò:} Xác định đơn vị đo lường năng suất.
+            \end{itemize}
+            \item \textbf{Value:} Giá trị năng suất (ví dụ: 14000).
+            \begin{itemize}
+                \item \textbf{Vai trò:} Giá trị chính để phân tích năng suất cây trồng.
+            \end{itemize}
+        \end{itemize}
+    \end{itemize}
+\end{description}
+
+\subsection{Quá trình tiền xử lý dữ liệu}
+
+\subsubsection{Đọc và kiểm tra dữ liệu}
+
+\hspace{0.5cm}Quá trình tiền xử lý dữ liệu bắt đầu bằng việc đọc và kiểm tra dữ liệu từ các file CSV và Excel. Hệ thống tự động phát hiện và chuyển đổi kiểu dữ liệu dựa trên:
+
+\begin{itemize}
+    \item \textbf{Tên cột:} Hệ thống tự động nhận diện các cột số thông qua các từ khóa như 'value', 'avg', 'average', 'temp', 'rain', 'yield', 'tonnes'.
+    \item \textbf{Giá trị:} Kiểm tra khả năng chuyển đổi các giá trị thành số.
+    \item \textbf{Định dạng:} Hỗ trợ đọc dữ liệu từ cả file CSV và Excel.
+\end{itemize}
+
+\subsubsection{Xử lý dữ liệu thiếu và trùng lặp}
+
+\hspace{0.5cm}Hệ thống thực hiện các bước xử lý dữ liệu thiếu và trùng lặp:
+
+\begin{itemize}
+    \item \textbf{Xử lý dữ liệu thiếu:}
+    \begin{itemize}
+        \item Cột số: Thay thế bằng giá trị trung bình (mean)
+        \item Cột phân loại: Thay thế bằng giá trị xuất hiện nhiều nhất (mode)
+    \end{itemize}
+    
+    \item \textbf{Xử lý dữ liệu trùng lặp:}
+    \begin{itemize}
+        \item Tự động phát hiện và loại bỏ các hàng trùng lặp
+        \item Ghi log số lượng hàng bị loại bỏ
+    \end{itemize}
+\end{itemize}
+
+\subsubsection{Kỹ thuật biến đổi đặc trưng}
+
+\hspace{0.5cm}Hệ thống thực hiện các biến đổi đặc trưng để chuẩn bị dữ liệu cho việc phân tích:
+
+\begin{itemize}
+    \item \textbf{Xử lý cột số:}
+    \begin{itemize}
+        \item Phát hiện và xử lý ngoại lệ (outliers) sử dụng phương pháp IQR
+        \item Chuẩn hóa dữ liệu sử dụng MinMaxScaler
+        \item Tự động loại trừ các cột đặc biệt (Year, Year Code, Area Code)
+    \end{itemize}
+    
+    \item \textbf{Xử lý cột phân loại:}
+    \begin{itemize}
+        \item Chuyển đổi thành biến giả (dummy variables) với giới hạn số lượng hạng mục
+        \item Giới hạn tối đa 10 hạng mục cho mỗi đặc trưng
+        \item Tùy chọn giữ lại cột phân loại gốc
+    \end{itemize}
+\end{itemize}
+
+\subsubsection{Kết quả xử lý chi tiết}
+
+\hspace{0.5cm}Kết quả xử lý cho từng dataset được thể hiện chi tiết như sau:
+
+\begin{itemize}
+    \item \textbf{rainfall.csv:}
+    \begin{itemize}
+        \item Ban đầu: 6,727 hàng × 3 cột
+        \item Sau xử lý: 6,727 hàng × 12 cột
+        \item Các cột được xử lý:
+        \begin{itemize}
+            \item \textbf{Year:} Giữ nguyên giá trị năm
+            \item \textbf{average\_rain\_fall\_mm\_per\_year:} Chuẩn hóa về khoảng [0,1] (ví dụ: 0.09442353746151214)
+            \item \textbf{Area:} Chuyển đổi thành 10 biến giả (dummy variables) cho các quốc gia phổ biến nhất, còn lại gộp vào nhóm "Other"
+            \begin{itemize}
+                \item Area\_Afghanistan
+                \item Area\_Albania
+                \item Area\_Algeria
+                \item Area\_American Samoa
+                \item Area\_Andorra
+                \item Area\_Angola
+                \item Area\_Antigua and Barbuda
+                \item Area\_Argentina
+                \item Area\_Armenia
+                \item Area\_Other
+            \end{itemize}
+        \end{itemize}
+    \end{itemize}
+    
+    \item \textbf{pesticides.csv:}
+    \begin{itemize}
+        \item Ban đầu: 4,349 hàng × 7 cột
+        \item Sau xử lý: 4,349 hàng × 16 cột
+        \item Các cột được xử lý:
+        \begin{itemize}
+            \item \textbf{Year:} Giữ nguyên giá trị năm
+            \item \textbf{Value:} Chuẩn hóa về khoảng [0,1] (ví dụ: 0.006194644959811601)
+            \item \textbf{Domain:} Chuyển đổi thành biến giả (ví dụ: Domain\_Pesticides Use)
+            \item \textbf{Area:} Chuyển đổi thành 10 biến giả cho các quốc gia phổ biến nhất
+            \item \textbf{Element:} Chuyển đổi thành biến giả (ví dụ: Element\_Use)
+            \item \textbf{Item:} Chuyển đổi thành biến giả (ví dụ: Item\_Pesticides (total))
+            \item \textbf{Unit:} Chuyển đổi thành biến giả (ví dụ: Unit\_tonnes of active ingredients)
+        \end{itemize}
+    \end{itemize}
+    
+    \item \textbf{temp.csv:}
+    \begin{itemize}
+        \item Ban đầu: 71,311 hàng × 3 cột
+        \item Sau xử lý: 64,353 hàng × 12 cột
+        \item Các cột được xử lý:
+        \begin{itemize}
+            \item \textbf{Year:} Giữ nguyên giá trị năm
+            \item \textbf{avg\_temp:} Chuẩn hóa về khoảng [0,1]
+            \item \textbf{Country:} Chuyển đổi thành 10 biến giả cho các quốc gia phổ biến nhất
+        \end{itemize}
+        \item Xử lý 2,547 giá trị thiếu trong cột avg\_temp
+        \item Loại bỏ 6,958 hàng trùng lặp
+    \end{itemize}
+    
+    \item \textbf{yield.csv:}
+    \begin{itemize}
+        \item Ban đầu: 56,717 hàng × 12 cột
+        \item Sau xử lý: 56,717 hàng × 30 cột
+        \item Các cột được xử lý:
+        \begin{itemize}
+            \item Các cột số (Value, Year Code, Area Code) được chuẩn hóa
+            \item Các cột phân loại (Domain, Area, Element, Item) được mã hóa one-hot
+            \item Giữ nguyên các cột mã (Domain Code, Area Code, Element Code, Item Code)
+        \end{itemize}
+    \end{itemize}
+    
+    \item \textbf{yield\_df.csv:}
+    \begin{itemize}
+        \item Ban đầu: 28,242 hàng × 8 cột
+        \item Sau xử lý: 28,242 hàng × 26 cột
+        \item Các cột được xử lý:
+        \begin{itemize}
+            \item Các cột số (hg/ha\_yield, average\_rain\_fall\_mm\_per\_year, pesticides\_tonnes, avg\_temp) được chuẩn hóa
+            \item Các cột phân loại (Area, Item) được mã hóa one-hot
+            \item Giữ nguyên cột Year
+        \end{itemize}
+    \end{itemize}
+\end{itemize}
+
+\subsubsection{Kiểm tra chất lượng dữ liệu}
+
+\hspace{0.5cm}Hệ thống thực hiện các kiểm tra chất lượng dữ liệu:
+
+\begin{itemize}
+    \item \textbf{Kiểm tra kích thước:} Đảm bảo số lượng hàng và cột được duy trì
+    \item \textbf{Kiểm tra kiểu dữ liệu:} Xác nhận kiểu dữ liệu chính xác sau khi xử lý
+    \item \textbf{Kiểm tra giá trị thiếu:} Đảm bảo tất cả giá trị thiếu đã được xử lý
+    \item \textbf{Ghi log:} Ghi lại chi tiết các bước xử lý và thay đổi
+\end{itemize}
+
+\subsubsection{Tính năng nổi bật của hệ thống}
+
+\hspace{0.5cm}Hệ thống tiền xử lý dữ liệu có các tính năng nổi bật:
+
+\begin{itemize}
+    \item \textbf{Xử lý tự động:} Yêu cầu can thiệp thủ công tối thiểu
+    \item \textbf{Xử lý lỗi mạnh mẽ:} Xử lý linh hoạt các vấn đề dữ liệu
+    \item \textbf{Ghi log chi tiết:} Ghi lại đầy đủ các bước xử lý
+    \item \textbf{Cấu hình linh hoạt:} Dễ dàng điều chỉnh tham số xử lý
+    \item \textbf{Kiểm tra kiểu dữ liệu:} Kiểm tra chặt chẽ kiểu dữ liệu
+    \item \textbf{Khả năng mở rộng:} Xử lý hiệu quả với tập dữ liệu lớn
+\end{itemize}
+
+\subsection*{Tóm Tắt}
+Mỗi dataset có các thuộc tính đặc trưng riêng, và trong quá trình tiền xử lý, các thuộc tính này sẽ được làm sạch, chuẩn hóa và tích hợp để đảm bảo dữ liệu có chất lượng tốt nhất cho việc phân tích và xây dựng mô hình học máy. Việc hiểu rõ vai trò của từng thuộc tính trong dữ liệu sẽ giúp xác định cách thức xử lý và cải thiện chất lượng dữ liệu hiệu quả hơn.
