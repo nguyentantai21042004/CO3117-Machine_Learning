@@ -4,6 +4,20 @@
 
 \hspace{0.5cm}Trong dự án này, tiền xử lý dữ liệu đóng vai trò quan trọng trong việc chuẩn bị dữ liệu về chất lượng không khí cho mô hình học máy. Dữ liệu thô (\textit{raw data}) chứa thông tin về các chỉ số ô nhiễm không khí, nhiệt độ, độ ẩm và thời gian, cần được xử lý để đảm bảo tính chính xác và hiệu quả của mô hình dự đoán.
 
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.9\textwidth]{images/raw_data_preview.png}
+    \caption{Hiển thị dữ liệu gốc trước khi tiền xử lý}
+    \label{fig:raw_data_preview}
+\end{figure}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.9\textwidth]{images/raw_data_statistics.png}
+    \caption{Thống kê mô tả dữ liệu gốc}
+    \label{fig:raw_data_statistics}
+\end{figure}
+
 \subsection{Quá trình tiền xử lý dữ liệu}
 
 \subsubsection{Bước 1: Xử lý các cột không cần thiết}
@@ -30,6 +44,13 @@
     \item Đặc biệt xử lý cột NMHC(GT) để đảm bảo không có giá trị âm
 \end{itemize}
 
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.9\textwidth]{images/data_distribution_comparison.png}
+    \caption{So sánh phân phối dữ liệu trước và sau khi xử lý ngoại lệ}
+    \label{fig:data_distribution}
+\end{figure}
+
 \subsubsection{Bước 5: Tạo đặc trưng mới}
 \hspace{0.5cm}Nhóm tạo các đặc trưng mới từ dữ liệu hiện có:
 \begin{itemize}
@@ -54,6 +75,13 @@
     \end{itemize}
 \end{itemize}
 
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.9\textwidth]{images/processed_data_preview.png}
+    \caption{Hiển thị dữ liệu sau khi tiền xử lý}
+    \label{fig:processed_data_preview}
+\end{figure}
+
 \subsubsection{Thống kê mô tả}
 \hspace{0.5cm}Các thống kê chính của dữ liệu sau tiền xử lý:
 \begin{itemize}
@@ -62,6 +90,13 @@
     \item NMHC(GT): Giá trị trung bình 213.58, dao động từ 29 đến 405
     \item C6H6(GT): Giá trị trung bình 10.06, dao động từ 0.10 đến 63.70
 \end{itemize}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.9\textwidth]{images/processed_data_statistics.png}
+    \caption{Thống kê mô tả dữ liệu sau tiền xử lý}
+    \label{fig:processed_data_statistics}
+\end{figure}
 
 \subsection{Ý nghĩa của các đặc trưng}
 
