@@ -20,6 +20,39 @@
     \label{fig:raw_data_statistics}
 \end{figure}
 
+\subsection{Ý nghĩa của các đặc trưng}
+
+\begin{description}
+    \item[CO(GT)]: Nồng độ Carbon Monoxide trong không khí, được tính toán là trung bình theo giờ (hourly averaged). Dữ liệu này được thu thập từ một máy phân tích tham chiếu (reference analyzer), có độ chính xác cao. Nồng độ CO được đo bằng mg/m³ (miligram trên mét khối). Carbon monoxide (CO) là một khí độc, không mùi và không màu, có thể gây nguy hiểm nếu nồng độ trong không khí quá cao. Khi nồng độ CO vượt quá mức an toàn, nó có thể gây ra các triệu chứng như chóng mặt, đau đầu, và thậm chí là ngộ độc, nguy hiểm đến tính mạng nếu nồng độ quá cao.
+
+    \item[PT08.S1(CO)]: Phản hồi cảm biến theo giờ (hourly averaged sensor response) của một cảm biến được thiết kế để đo nồng độ khí carbon monoxide (CO). Dữ liệu này là giá trị đo được từ một cảm biến cụ thể (có thể là cảm biến điện hóa hoặc cảm biến quang học) được sử dụng để đo nồng độ CO. Cảm biến này không đo trực tiếp nồng độ CO bằng đơn vị mg/m³ hoặc ppm, mà thay vào đó là đo phản hồi của cảm biến (có thể là tín hiệu điện hay tín hiệu quang học).
+
+    \item[NMHC(GT)]: Nồng độ trung bình theo giờ của các hợp chất hữu cơ không bão hòa (Non-Methane Hydrocarbons - NMHC) trong không khí. Dữ liệu này được thu thập từ một máy phân tích tham chiếu (reference analyzer), và giá trị trong cột này là nồng độ của các hợp chất này, đo bằng microgram mỗi mét khối (µg/m³). NMHC là một nhóm các hợp chất hữu cơ dễ bay hơi (VOCs) không chứa metan. Những hợp chất này thường xuất hiện trong khí thải từ các nguồn như giao thông, công nghiệp, hoặc từ các sản phẩm tiêu dùng như sơn và dung môi.
+
+    \item[C6H6(GT)]: Nồng độ trung bình theo giờ của Benzen (C6H6) trong không khí, đo bằng microgram mỗi mét khối (µg/m³). Benzen là một hợp chất rất nguy hiểm nếu tiếp xúc lâu dài hoặc với nồng độ cao. Nó có thể gây ra các vấn đề nghiêm trọng về sức khỏe, bao gồm các bệnh về máu, ung thư và các vấn đề liên quan đến hệ thần kinh.
+
+    \item[PT08.S2(NMHC)]: Phản hồi cảm biến theo giờ của một cảm biến được thiết kế để đo nồng độ các hợp chất hữu cơ không bão hòa (Non-Methane Hydrocarbons - NMHC) trong không khí. Dữ liệu này không đo nồng độ NMHC trực tiếp bằng các đơn vị như µg/m³ hay ppm, mà là giá trị phản hồi của cảm biến.
+
+    \item[NOx(GT)]: Nồng độ trung bình theo giờ của Nitrogen Oxides (NOx) trong không khí, được đo bằng một máy phân tích tham chiếu. Đơn vị đo trong cột này là ppb (parts per billion). NOx là một nhóm các hợp chất bao gồm Nitrogen Dioxide (NO2) và Nitric Oxide (NO), có thể gây ảnh hưởng đến sức khỏe con người và môi trường.
+
+    \item[PT08.S3(NOx)]: Phản hồi cảm biến theo giờ của một cảm biến được thiết kế để đo nồng độ Nitrogen Oxides (NOx) trong không khí. Dữ liệu này là phản hồi của cảm biến, tính trung bình trong suốt một giờ.
+
+    \item[NO2(GT)]: Nồng độ trung bình theo giờ của Nitrogen Dioxide (NO2) trong không khí, được đo bằng một máy phân tích tham chiếu. Đơn vị đo của cột này là microgram per cubic meter (µg/m³). NO2 là một chất ô nhiễm quan trọng trong không khí, có thể gây ra các vấn đề sức khỏe nghiêm trọng.
+
+    \item[PT08.S4(NO2)]: Phản hồi cảm biến theo giờ của một cảm biến được thiết kế để đo nồng độ Nitrogen Dioxide (NO2) trong không khí. Dữ liệu này là phản hồi cảm biến, tính trung bình trong suốt một giờ.
+
+    \item[PT08.S5(O3)]: Phản hồi cảm biến theo giờ của một cảm biến được thiết kế để đo nồng độ Ozone (O3) trong không khí. Dữ liệu này là phản hồi của cảm biến, được tính trung bình trong suốt một giờ.
+
+    \item[T]: Nhiệt độ (Temperature) trong không khí, được đo bằng đơn vị độ Celsius (°C). Nhiệt độ đóng vai trò quan trọng trong việc xác định điều kiện môi trường và ảnh hưởng đến sự phân tán và pha loãng các chất ô nhiễm.
+
+    \item[RH]: Độ ẩm tương đối (Relative Humidity), được đo bằng đơn vị % (phần trăm). Đây là tỷ lệ giữa lượng hơi nước hiện có trong không khí và lượng hơi nước tối đa mà không khí có thể chứa tại một nhiệt độ nhất định. Độ ẩm tương đối ảnh hưởng lớn đến chất lượng không khí và các phản ứng hóa học trong khí quyển.
+
+    \item[AH]: Độ ẩm tuyệt đối (Absolute Humidity), được đo bằng đơn vị g/m³ (gram trên mét khối). Đây là lượng hơi nước có trong không khí, không phụ thuộc vào nhiệt độ. Độ ẩm tuyệt đối là một chỉ số quan trọng để hiểu rõ hơn về sự thay đổi của lượng hơi nước trong không khí và ảnh hưởng của nó đến chất lượng không khí.
+
+    \item[Date\_Time]: Thời gian đo đạc
+    \item[Year, Month, Day, Hour]: Các đặc trưng thời gian
+\end{description}
+
 \subsection{Quá trình tiền xử lý dữ liệu}
 
 \subsubsection{Bước 1: Xử lý các cột không cần thiết}
@@ -102,26 +135,6 @@
     \caption{Thống kê mô tả dữ liệu sau tiền xử lý}
     \label{fig:processed_data_statistics}
 \end{figure}
-
-\subsection{Ý nghĩa của các đặc trưng}
-
-\begin{description}
-    \item[CO(GT)]: Nồng độ Carbon Monoxide trong không khí
-    \item[PT08.S1(CO)]: Giá trị cảm biến CO
-    \item[NMHC(GT)]: Nồng độ Non-methane Hydrocarbons
-    \item[C6H6(GT)]: Nồng độ Benzene
-    \item[PT08.S2(NMHC)]: Giá trị cảm biến NMHC
-    \item[NOx(GT)]: Nồng độ Nitrogen Oxides
-    \item[PT08.S3(NOx)]: Giá trị cảm biến NOx
-    \item[NO2(GT)]: Nồng độ Nitrogen Dioxide
-    \item[PT08.S4(NO2)]: Giá trị cảm biến NO2
-    \item[PT08.S5(O3)]: Giá trị cảm biến Ozone
-    \item[T]: Nhiệt độ
-    \item[RH]: Độ ẩm tương đối
-    \item[AH]: Độ ẩm tuyệt đối
-    \item[Date\_Time]: Thời gian đo đạc
-    \item[Year, Month, Day, Hour]: Các đặc trưng thời gian
-\end{description}
 
 \subsection{Kết luận}
 \hspace{0.5cm}Quá trình tiền xử lý dữ liệu đã giúp chuẩn bị bộ dữ liệu chất lượng không khí cho việc xây dựng mô hình học máy. Các bước xử lý đã giải quyết các vấn đề về giá trị thiếu, ngoại lệ và tạo thêm các đặc trưng có ý nghĩa. Kết quả cho thấy dữ liệu đã được chuẩn hóa và sẵn sàng cho việc huấn luyện mô hình.
