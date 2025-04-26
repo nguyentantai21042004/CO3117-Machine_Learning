@@ -1,17 +1,55 @@
-\section{Giới thiệu dự án}
+\section{Giới thiệu}
 
-Trong bối cảnh nền kinh tế Việt Nam đang ngày càng hội nhập sâu rộng với thế giới, nông nghiệp vẫn giữ vai trò then chốt trong việc đảm bảo an ninh lương thực và phát triển bền vững. Tuy nhiên, giá nông sản luôn biến động khó lường do chịu ảnh hưởng bởi nhiều yếu tố như thời tiết, dịch bệnh, chi phí vận chuyển, chính sách thị trường và nhu cầu tiêu dùng. Việc phân tích và dự đoán giá nông sản một cách chính xác không chỉ giúp nông dân và doanh nghiệp nông nghiệp đưa ra quyết định sản xuất, kinh doanh hiệu quả mà còn hỗ trợ cơ quan quản lý nhà nước trong công tác hoạch định chính sách.
+\subsection{Bối cảnh nghiên cứu}
+\hspace{0.5cm}Ô nhiễm không khí là một trong những vấn đề môi trường nghiêm trọng nhất hiện nay, đặc biệt là tại các khu vực đô thị. Trong đó, Carbon Monoxide (CO) và Carbon Dioxide (CO2) là hai trong số các chất ô nhiễm không khí quan trọng cần được theo dõi và kiểm soát. CO là một khí độc không màu, không mùi, có thể gây nguy hiểm đến sức khỏe con người khi tiếp xúc ở nồng độ cao. CO2, mặc dù ít độc hơn, nhưng là một trong những khí nhà kính chính góp phần vào biến đổi khí hậu toàn cầu.
 
-Do đó, đề tài \textbf{"Phân tích các yếu tố ảnh hưởng tới giá nông sản và xây dựng mô hình dự đoán"} mang tính cần thiết và cấp thiết trong thực tiễn. Bằng việc áp dụng các phương pháp phân tích và học máy hiện đại, đề tài hướng tới mục tiêu không chỉ tìm hiểu mối quan hệ giữa các yếu tố ảnh hưởng mà còn xây dựng mô hình dự đoán có độ chính xác cao, hỗ trợ người dùng trong việc đưa ra quyết định kịp thời.
-
-Để đạt được mục tiêu đó, nhóm đề tài sử dụng các phương pháp phân lớp dữ liệu phổ biến trong lĩnh vực học máy, bao gồm:
+\subsection{Mục tiêu nghiên cứu}
+\hspace{0.5cm}Dự án này tập trung vào việc phát triển các mô hình học máy để dự đoán nồng độ CO và CO2 trong không khí dựa trên bộ dữ liệu Air Quality từ UCI Machine Learning Repository. Cụ thể, các mục tiêu chính bao gồm:
 
 \begin{itemize}
-    \item \textbf{Hồi quy tuyến tính (Linear Regression)}: Mô hình dự đoán tuyến tính đơn giản nhưng hiệu quả với dữ liệu có mối quan hệ tuyến tính.
-    \item \textbf{Cây quyết định (Decision Tree)}: Phương pháp phân loại dữ liệu theo dạng cây nhị phân, dễ diễn giải và trực quan.
-    \item \textbf{Xác suất Bayes (Naive Bayes)}: Phương pháp dựa trên định lý Bayes, phù hợp với dữ liệu có tính độc lập tương đối giữa các đặc trưng.
-    \item \textbf{Mạng nơ-ron nhân tạo (Artificial Neural Network - ANN)}: Mô hình mô phỏng hoạt động của nơ-ron sinh học, có khả năng học sâu và phi tuyến.
-    \item \textbf{K-nearest neighbors (KNN)}: Phương pháp phân loại dựa trên khoảng cách với các điểm lân cận gần nhất trong không gian đặc trưng.
+    \item Phân tích và xử lý dữ liệu từ các cảm biến chất lượng không khí
+    \item Xây dựng các mô hình dự đoán nồng độ CO và CO2
+    \item Đánh giá hiệu suất của các mô hình dự đoán
+    \item Phân tích tầm quan trọng của các yếu tố ảnh hưởng đến nồng độ CO và CO2
 \end{itemize}
 
-Với cách tiếp cận đa phương pháp như trên, đề tài kỳ vọng sẽ đưa ra được đánh giá toàn diện về các yếu tố ảnh hưởng và lựa chọn được mô hình dự đoán giá nông sản phù hợp nhất với dữ liệu thực tế.
+\subsection{Bộ dữ liệu}
+\hspace{0.5cm}Bộ dữ liệu Air Quality được thu thập từ một thiết bị đa cảm biến khí được triển khai tại một thành phố ở Ý. Dữ liệu bao gồm:
+
+\begin{itemize}
+    \item Thời gian thu thập: Từ tháng 3/2004 đến tháng 2/2005
+    \item Số lượng mẫu: 9,358 mẫu
+    \item Tần suất: Trung bình theo giờ
+    \item Các đặc trưng chính:
+    \begin{itemize}
+        \item Nồng độ CO (mg/m³)
+        \item Nồng độ các hợp chất hữu cơ không chứa metan (µg/m³)
+        \item Nồng độ Benzen (µg/m³)
+        \item Nồng độ NOx (ppb)
+        \item Nồng độ NO2 (µg/m³)
+        \item Nhiệt độ (°C)
+        \item Độ ẩm tương đối (\%)
+        \item Độ ẩm tuyệt đối (g/m³)
+    \end{itemize}
+\end{itemize}
+
+\subsection{Ý nghĩa thực tiễn}
+\hspace{0.5cm}Nghiên cứu này có ý nghĩa quan trọng trong việc:
+
+\begin{itemize}
+    \item Cảnh báo sớm về mức độ ô nhiễm không khí
+    \item Hỗ trợ các cơ quan quản lý môi trường trong việc ra quyết định
+    \item Nâng cao nhận thức cộng đồng về chất lượng không khí
+    \item Góp phần vào việc phát triển các hệ thống giám sát chất lượng không khí thông minh
+\end{itemize}
+
+\subsection{Cấu trúc báo cáo}
+\hspace{0.5cm}Báo cáo được tổ chức thành các phần chính sau:
+
+\begin{itemize}
+    \item Phần 1: Giới thiệu tổng quan về đề tài
+    \item Phần 2: Cơ sở lý thuyết về học máy và các mô hình dự đoán
+    \item Phần 3: Phương pháp nghiên cứu và xử lý dữ liệu
+    \item Phần 4: Kết quả thực nghiệm và đánh giá
+    \item Phần 5: Kết luận và hướng phát triển
+\end{itemize}
