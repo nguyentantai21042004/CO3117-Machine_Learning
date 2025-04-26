@@ -1,24 +1,120 @@
 \section{Mô hình Random Forest}
 
-\subsection{Cài đặt và huấn luyện}
-Trong phần này, chúng tôi sẽ trình bày chi tiết về quá trình cài đặt và huấn luyện mô hình Random Forest. Chúng tôi sẽ sử dụng thư viện scikit-learn của Python để triển khai mô hình.
+\subsection{Giới thiệu}
+Mô hình Random Forest đã được triển khai để dự đoán nồng độ CO (Carbon Monoxide) trong không khí dựa trên các thông số môi trường khác nhau. Đây là một mô hình học máy mạnh mẽ thuộc họ Ensemble Learning, kết hợp nhiều cây quyết định để tạo ra dự đoán chính xác hơn.
 
-\subsection{Tuning hyperparameters}
-Chúng tôi sẽ thực hiện tối ưu hóa các tham số quan trọng của Random Forest như:
+\subsection{Quy trình Xử lý Dữ liệu}
+
+\subsubsection{Tiền xử lý dữ liệu}
 \begin{itemize}
-    \item Số lượng cây quyết định (n\_estimators)
-    \item Độ sâu tối đa của cây (max\_depth)
-    \item Số lượng features được xem xét tại mỗi node (max\_features)
-    \item Các tham số khác như min\_samples\_split, min\_samples\_leaf
+    \item Loại bỏ các cột không cần thiết
+    \item Xử lý giá trị thiếu:
+    \begin{itemize}
+        \item Thay thế giá trị thiếu trong cột số bằng giá trị trung bình
+        \item Thay thế giá trị thiếu trong cột phân loại bằng giá trị xuất hiện nhiều nhất
+    \end{itemize}
+    \item Chuyển đổi kiểu dữ liệu:
+    \begin{itemize}
+        \item Chuyển cột Date từ định dạng DD/MM/YYYY sang datetime
+        \item Chuyển cột Time từ định dạng HH.MM.SS sang time
+        \item Xử lý các giá trị âm trong cột CO(GT) bằng cách thay thế bằng giá trị trung bình
+    \end{itemize}
 \end{itemize}
 
-\subsection{Kết quả và đánh giá}
-Chúng tôi sẽ trình bày kết quả của mô hình Random Forest với các chỉ số đánh giá:
+\subsubsection{Kỹ thuật Feature Engineering}
+Mô hình đã tạo ra các đặc trưng mới để cải thiện hiệu suất:
 \begin{itemize}
-    \item Accuracy
-    \item Precision
-    \item Recall
-    \item F1-score
-    \item Confusion Matrix
-    \item ROC Curve và AUC
+    \item Tương tác giữa các đặc trưng:
+    \begin{itemize}
+        \item \texttt{Temp\_Humidity}: Tương tác giữa nhiệt độ và độ ẩm
+        \item \texttt{NOx\_NO2}: Tương tác giữa NOx và NO2
+    \end{itemize}
+    \item Đặc trưng đa thức:
+    \begin{itemize}
+        \item \texttt{Temp\_squared}: Bình phương nhiệt độ
+        \item \texttt{RH\_squared}: Bình phương độ ẩm
+    \end{itemize}
+    \item Đặc trưng thời gian:
+    \begin{itemize}
+        \item \texttt{Hour\_sin} và \texttt{Hour\_cos}: Biểu diễn chu kỳ giờ
+        \item \texttt{Month\_sin} và \texttt{Month\_cos}: Biểu diễn chu kỳ tháng
+    \end{itemize}
+    \item Tỷ lệ giữa các đặc trưng:
+    \begin{itemize}
+        \item \texttt{NOx\_NO2\_ratio}: Tỷ lệ giữa NOx và NO2
+        \item \texttt{Temp\_RH\_ratio}: Tỷ lệ giữa nhiệt độ và độ ẩm
+    \end{itemize}
+    \item Đặc trưng cửa sổ trượt:
+    \begin{itemize}
+        \item Tính trung bình và độ lệch chuẩn trong cửa sổ 3 điểm cho các đặc trưng quan trọng
+    \end{itemize}
 \end{itemize}
+
+\subsection{Kiến trúc Mô hình Random Forest}
+
+\subsubsection{Tham số Mô hình}
+Mô hình được triển khai với các tham số tối ưu:
+\begin{itemize}
+    \item \texttt{n\_estimators}: 100 cây quyết định
+    \item \texttt{max\_depth}: Không giới hạn độ sâu
+    \item \texttt{min\_samples\_split}: 2 mẫu tối thiểu để tách nút
+    \item \texttt{random\_state}: 42 để đảm bảo khả năng tái lập kết quả
+\end{itemize}
+
+\subsubsection{Quy trình Huấn luyện}
+\begin{enumerate}
+    \item Chuẩn hóa dữ liệu sử dụng StandardScaler
+    \item Chia dữ liệu thành tập huấn luyện (80\%) và tập kiểm tra (20\%)
+    \item Huấn luyện mô hình trên tập huấn luyện
+    \item Đánh giá hiệu suất trên tập kiểm tra
+\end{enumerate}
+
+\subsection{Kết quả và Đánh giá}
+
+\subsubsection{Các chỉ số Đánh giá}
+Mô hình được đánh giá dựa trên các chỉ số:
+\begin{itemize}
+    \item Mean Squared Error (MSE)
+    \item Root Mean Squared Error (RMSE)
+    \item Mean Absolute Error (MAE)
+    \item R-squared (R²)
+\end{itemize}
+
+\subsubsection{Trực quan hóa Kết quả}
+Các biểu đồ được tạo ra để phân tích kết quả:
+\begin{itemize}
+    \item Biểu đồ so sánh giá trị thực tế và dự đoán:
+    \begin{figure}[h]
+        \centering
+        \includegraphics[width=0.8\textwidth]{images/random_forest/predictions_comparison.png}
+        \caption{So sánh giá trị thực tế và dự đoán}
+        \label{fig:predictions}
+    \end{figure}
+    
+    \item Biểu đồ phân tích phần dư:
+    \begin{figure}[h]
+        \centering
+        \includegraphics[width=0.8\textwidth]{images/random_forest/residuals_plot.png}
+        \caption{Phân tích phần dư}
+        \label{fig:residuals}
+    \end{figure}
+    
+    \item Biểu đồ tầm quan trọng của đặc trưng:
+    \begin{figure}[h]
+        \centering
+        \includegraphics[width=0.8\textwidth]{images/random_forest/feature_importance.png}
+        \caption{Tầm quan trọng của các đặc trưng}
+        \label{fig:importance}
+    \end{figure}
+\end{itemize}
+
+\subsubsection{Lưu trữ Kết quả}
+Các kết quả được lưu trữ trong thư mục \texttt{train\_results}:
+\begin{itemize}
+    \item \texttt{model\_metrics.csv}: Chứa các chỉ số đánh giá
+    \item \texttt{predictions.csv}: Chứa giá trị thực tế và dự đoán
+    \item \texttt{evaluation\_metrics.csv}: Chứa kết quả đánh giá chi tiết
+\end{itemize}
+
+\subsection{Kết luận}
+Mô hình Random Forest đã được triển khai thành công với quy trình xử lý dữ liệu toàn diện và kỹ thuật feature engineering tiên tiến. Các kết quả được lưu trữ và trực quan hóa đầy đủ, cho phép phân tích sâu về hiệu suất của mô hình. Việc sử dụng các đặc trưng tương tác và đặc trưng thời gian đã góp phần cải thiện độ chính xác của dự đoán nồng độ CO trong không khí.
