@@ -4,16 +4,18 @@
 
 \hspace{0.5cm}Trong dự án này, tiền xử lý dữ liệu đóng vai trò quan trọng trong việc chuẩn bị dữ liệu về chất lượng không khí cho mô hình học máy. Dữ liệu thô (\textit{raw data}) chứa thông tin về các chỉ số ô nhiễm không khí, nhiệt độ, độ ẩm và thời gian, cần được xử lý để đảm bảo tính chính xác và hiệu quả của mô hình dự đoán.
 
-\begin{figure}[h]
+\begin{figure}[htbp]
     \centering
     \includegraphics[width=0.9\textwidth]{images/raw_data_preview.png}
+    \vspace{0.5cm}
     \caption{Hiển thị dữ liệu gốc trước khi tiền xử lý}
     \label{fig:raw_data_preview}
 \end{figure}
 
-\begin{figure}[h]
+\begin{figure}[htbp]
     \centering
-    \includegraphics[width=0.9\textwidth]{images/raw_data_statistics.png}
+    \includegraphics[width=0.45\textwidth]{images/raw_data_statistics.png}
+    \vspace{0.5cm}
     \caption{Thống kê mô tả dữ liệu gốc}
     \label{fig:raw_data_statistics}
 \end{figure}
@@ -44,9 +46,10 @@
     \item Đặc biệt xử lý cột NMHC(GT) để đảm bảo không có giá trị âm
 \end{itemize}
 
-\begin{figure}[h]
+\begin{figure}[htbp]
     \centering
     \includegraphics[width=0.9\textwidth]{images/data_distribution_comparison.png}
+    \vspace{0.5cm}
     \caption{So sánh phân phối dữ liệu trước và sau khi xử lý ngoại lệ}
     \label{fig:data_distribution}
 \end{figure}
@@ -75,9 +78,10 @@
     \end{itemize}
 \end{itemize}
 
-\begin{figure}[h]
+\begin{figure}[htbp]
     \centering
     \includegraphics[width=0.9\textwidth]{images/processed_data_preview.png}
+    \vspace{0.5cm}
     \caption{Hiển thị dữ liệu sau khi tiền xử lý}
     \label{fig:processed_data_preview}
 \end{figure}
@@ -91,9 +95,10 @@
     \item C6H6(GT): Giá trị trung bình 10.06, dao động từ 0.10 đến 63.70
 \end{itemize}
 
-\begin{figure}[h]
+\begin{figure}[htbp]
     \centering
-    \includegraphics[width=0.9\textwidth]{images/processed_data_statistics.png}
+    \includegraphics[width=0.45\textwidth]{images/processed_data_statistics.png}
+    \vspace{0.5cm}
     \caption{Thống kê mô tả dữ liệu sau tiền xử lý}
     \label{fig:processed_data_statistics}
 \end{figure}
