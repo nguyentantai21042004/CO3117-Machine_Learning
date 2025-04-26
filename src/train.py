@@ -115,10 +115,10 @@ def plot_feature_importance(model, feature_names, top_n=10):
         
         # Create results directory if it doesn't exist
         import os
-        os.makedirs('../assignment/train_results', exist_ok=True)
+        os.makedirs('train_results', exist_ok=True)
         
         # Save plot
-        output_path = '../assignment/train_results/feature_importance.png'
+        output_path = 'train_results/feature_importance.png'
         plt.savefig(output_path)
         logger.info(f"Feature importance plot saved to '{output_path}'")
         
@@ -129,7 +129,7 @@ def plot_feature_importance(model, feature_names, top_n=10):
         logger.error(f"Error plotting feature importance: {str(e)}")
         raise
 
-def save_model_results(model, evaluation_metrics, output_dir='../assignment/train_results'):
+def save_model_results(model, evaluation_metrics, output_dir='train_results'):
     """
     Save model results and metrics to files.
     

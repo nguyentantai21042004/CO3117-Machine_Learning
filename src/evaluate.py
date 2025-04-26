@@ -43,7 +43,7 @@ def evaluate_model_performance(y_test, y_pred):
         logger.error(f"Error calculating performance metrics: {str(e)}")
         raise
 
-def plot_predictions(y_test, y_pred, output_dir='../assignment/evaluate_results'):
+def plot_predictions(y_test, y_pred, output_dir='train_results'):
     """
     Plot actual vs predicted values.
     
@@ -85,7 +85,7 @@ def plot_predictions(y_test, y_pred, output_dir='../assignment/evaluate_results'
         logger.error(f"Error plotting predictions: {str(e)}")
         raise
 
-def plot_residuals(y_test, y_pred, output_dir='../assignment/evaluate_results'):
+def plot_residuals(y_test, y_pred, output_dir='train_results'):
     """
     Plot residuals (differences between actual and predicted values).
     
@@ -129,7 +129,7 @@ def plot_residuals(y_test, y_pred, output_dir='../assignment/evaluate_results'):
         logger.error(f"Error plotting residuals: {str(e)}")
         raise
 
-def save_evaluation_results(metrics, output_dir='../assignment/evaluate_results'):
+def save_evaluation_results(metrics, output_dir='train_results'):
     """
     Save evaluation metrics to a CSV file.
     
@@ -163,7 +163,7 @@ def main():
         
         # Load test data and predictions
         y_test = pd.read_csv('../dataset/split_data/y_test.csv')['CO(GT)']
-        y_pred = pd.read_csv('../assignment/train_results/predictions.csv')['Predicted']
+        y_pred = pd.read_csv('train_results/predictions.csv')['Predicted']
         
         # Evaluate model performance
         metrics = evaluate_model_performance(y_test, y_pred)

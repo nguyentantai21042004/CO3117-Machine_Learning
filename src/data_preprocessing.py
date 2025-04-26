@@ -4,8 +4,11 @@ from src.utils import logger
 
 def preprocess_data(dataset):
     # Step 1: Load the dataset and remove unnecessary columns
-    logger.info("Step 1: Load the dataset and remove unnecessary columns")
+    logger.info("Step 1: Load the dataset, display information about the dataset before preprocessing and remove unnecessary columns")
     dataset = dataset.drop(columns=["Unnamed: 15", "Unnamed: 16"], errors='ignore')
+    print(dataset.head())
+    print(dataset.info())
+    print(dataset.describe())
 
     # Step 2: Handle missing values in the dataset
     logger.info("Step 2: Handle missing values in the dataset")
