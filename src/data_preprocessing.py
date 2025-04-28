@@ -51,23 +51,23 @@ def preprocess_data(dataset):
         if column != "NMHC(GT)":  # Skip NMHC(GT) as it's handled separately
             # Calculate Z-scores to identify outliers
             z_scores = np.abs(dataset[column] - dataset[column].mean()) / dataset[column].std()
-            # Define a threshold for identifying outliers (3 standard deviations)
-            threshold = 3
+            # Define a threshold for identifying outliers (3.5 standard deviations)
+            threshold = 3.5
             
-            # Replace outliers with the mean value of the column
-            dataset[column] = np.where(z_scores > threshold, dataset[column].mean(), dataset[column])
+            # Replace outliers with the median value of the column
+            dataset[column] = np.where(z_scores > threshold, dataset[column].median(), dataset[column])
             
-            # Optional: Replace negative values (if they are not reasonable for that column) with the mean
+            # Optional: Replace negative values (if they are not reasonable for that column) with the median
             if column not in ["NOx(GT)", "NO2(GT)"]:  # These columns can have negative values
-                dataset[column] = np.where(dataset[column] < 0, dataset[column].mean(), dataset[column])
+                dataset[column] = np.where(dataset[column] < 0, dataset[column].median(), dataset[column])
 
     # Handle NMHC(GT) outliers separately
     if "NMHC(GT)" in dataset.columns:
         z_scores = np.abs(dataset["NMHC(GT)"] - dataset["NMHC(GT)"].mean()) / dataset["NMHC(GT)"].std()
-        threshold = 3
-        # Replace outliers with the mean of positive values
-        positive_mean = dataset[dataset["NMHC(GT)"] > 0]["NMHC(GT)"].mean()
-        dataset["NMHC(GT)"] = np.where(z_scores > threshold, positive_mean, dataset["NMHC(GT)"])
+        threshold = 3.5
+        # Replace outliers with the median of positive values
+        positive_median = dataset[dataset["NMHC(GT)"] > 0]["NMHC(GT)"].median()
+        dataset["NMHC(GT)"] = np.where(z_scores > threshold, positive_median, dataset["NMHC(GT)"])
         # Ensure no negative values
         dataset["NMHC(GT)"] = np.maximum(dataset["NMHC(GT)"], 0)
 
@@ -87,6 +87,21 @@ def preprocess_data(dataset):
     dataset['Day'] = dataset['Date_Time'].dt.day
     dataset['Hour'] = dataset['Date_Time'].dt.hour
     
+    # Add new interaction features
+    dataset['NOx_Temp'] = dataset['NOx(GT)'] * dataset['T']
+    dataset['NO2_Humidity'] = dataset['NO2(GT)'] * dataset['RH']
+    dataset['NOx_squared'] = dataset['NOx(GT)'] ** 2
+    dataset['NO2_squared'] = dataset['NO2(GT)'] ** 2
+    
+    # Add rolling window features with larger window
+    window_size = 5  # Increased from 3 to 5
+    for col in ['T', 'RH', 'NOx(GT)', 'NO2(GT)', 'CO(GT)']:
+        dataset[f'{col}_rolling_mean'] = dataset[col].rolling(window=window_size).mean()
+        dataset[f'{col}_rolling_std'] = dataset[col].rolling(window=window_size).std()
+    
+    # Fill NaN values created by rolling windows
+    dataset = dataset.fillna(method='bfill')
+
     # Display information about the dataset after preprocessing
     logger.info("Step 6: Display information about the dataset after preprocessing")
     print(dataset.head())

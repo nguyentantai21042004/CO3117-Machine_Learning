@@ -2,7 +2,7 @@ import pandas as pd  # type: ignore
 import numpy as np  # type: ignore
 import matplotlib.pyplot as plt  # type: ignore
 from sklearn.ensemble import RandomForestRegressor  # type: ignore
-from sklearn.metrics import mean_squared_error, r2_score  # type: ignore
+from sklearn.metrics import mean_squared_error, r2_score, mean_absolute_error  # type: ignore
 from src.utils import logger
 
 def train_random_forest(X_train, y_train, n_estimators=100, max_depth=None, min_samples_split=2, random_state=42):
@@ -65,11 +65,13 @@ def evaluate_model(model, X_test, y_test):
         mse = mean_squared_error(y_test, y_pred)
         rmse = np.sqrt(mse)
         r2 = r2_score(y_test, y_pred)
-        
+        msae = mean_absolute_error(y_test, y_pred)
+
         # Log results
         logger.info(f"Mean Squared Error (MSE): {mse:.4f}")
         logger.info(f"Root Mean Squared Error (RMSE): {rmse:.4f}")
         logger.info(f"R-squared (R²): {r2:.4f}")
+        logger.info(f"Mean Absolute Error (MAE): {msae:.4f}")
         
         return {
             'mse': mse,

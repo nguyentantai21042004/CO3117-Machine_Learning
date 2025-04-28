@@ -25,18 +25,21 @@ def evaluate_model_performance(y_test, y_pred):
         rmse = np.sqrt(mse)
         mae = mean_absolute_error(y_test, y_pred)
         r2 = r2_score(y_test, y_pred)
+        msae = mean_absolute_error(y_test, y_pred)
         
         # Log results
         logger.info(f"Mean Squared Error (MSE): {mse:.6f}")
         logger.info(f"Root Mean Squared Error (RMSE): {rmse:.6f}")
         logger.info(f"Mean Absolute Error (MAE): {mae:.6f}")
         logger.info(f"R-squared (R²): {r2:.6f}")
+        logger.info(f"Mean Absolute Percentage Error (MAPE): {msae:.6f}")   
         
         return {
             'mse': mse,
             'rmse': rmse,
             'mae': mae,
-            'r2': r2
+            'r2': r2,
+            'msae': msae
         }
         
     except Exception as e:
