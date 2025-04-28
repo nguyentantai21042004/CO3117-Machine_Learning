@@ -26,11 +26,15 @@ Mô hình đã tạo ra các đặc trưng mới để cải thiện hiệu su�
 \begin{itemize}
     \item Tương tác giữa các đặc trưng:
     \begin{itemize}
+        \item \texttt{NOx\_Temp}: Tương tác giữa NOx và nhiệt độ
+        \item \texttt{NO2\_Humidity}: Tương tác giữa NO2 và độ ẩm
         \item \texttt{Temp\_Humidity}: Tương tác giữa nhiệt độ và độ ẩm
         \item \texttt{NOx\_NO2}: Tương tác giữa NOx và NO2
     \end{itemize}
     \item Đặc trưng đa thức:
     \begin{itemize}
+        \item \texttt{NOx\_squared}: Bình phương NOx
+        \item \texttt{NO2\_squared}: Bình phương NO2
         \item \texttt{Temp\_squared}: Bình phương nhiệt độ
         \item \texttt{RH\_squared}: Bình phương độ ẩm
     \end{itemize}
@@ -42,11 +46,17 @@ Mô hình đã tạo ra các đặc trưng mới để cải thiện hiệu su�
     \item Tỷ lệ giữa các đặc trưng:
     \begin{itemize}
         \item \texttt{NOx\_NO2\_ratio}: Tỷ lệ giữa NOx và NO2
-        \item \texttt{Temp\_RH\_ratio}: Tỷ lệ giữa nhiệt độ và độ ẩm
     \end{itemize}
     \item Đặc trưng cửa sổ trượt:
     \begin{itemize}
-        \item Tính trung bình và độ lệch chuẩn trong cửa sổ 3 điểm cho các đặc trưng quan trọng
+        \item Tính trung bình và độ lệch chuẩn trong cửa sổ 3 điểm cho các đặc trưng quan trọng:
+        \begin{itemize}
+            \item Nhiệt độ (T)
+            \item Độ ẩm tương đối (RH)
+            \item NOx
+            \item NO2
+            \item CO
+        \end{itemize}
     \end{itemize}
 \end{itemize}
 
@@ -55,9 +65,9 @@ Mô hình đã tạo ra các đặc trưng mới để cải thiện hiệu su�
 \subsubsection{Tham số Mô hình}
 Mô hình được triển khai với các tham số tối ưu:
 \begin{itemize}
-    \item \texttt{n\_estimators}: 100 cây quyết định
-    \item \texttt{max\_depth}: Không giới hạn độ sâu
-    \item \texttt{min\_samples\_split}: 2 mẫu tối thiểu để tách nút
+    \item \texttt{n\_estimators}: 200 cây quyết định
+    \item \texttt{max\_depth}: 10 (giới hạn độ sâu tối đa)
+    \item \texttt{min\_samples\_split}: 4 mẫu tối thiểu để tách nút
     \item \texttt{random\_state}: 42 để đảm bảo khả năng tái lập kết quả
 \end{itemize}
 
@@ -72,12 +82,12 @@ Mô hình được triển khai với các tham số tối ưu:
 \subsection{Kết quả và Đánh giá}
 
 \subsubsection{Các chỉ số Đánh giá}
-Mô hình được đánh giá dựa trên các chỉ số:
+Mô hình đạt được kết quả ấn tượng với các chỉ số sau:
 \begin{itemize}
-    \item Mean Squared Error (MSE)
-    \item Root Mean Squared Error (RMSE)
-    \item Mean Absolute Error (MAE)
-    \item R-squared (R²)
+    \item Mean Squared Error (MSE): 0.0002
+    \item Root Mean Squared Error (RMSE): 0.0136
+    \item Mean Absolute Error (MAE): 0.0053
+    \item R-squared (R²): 0.9992
 \end{itemize}
 
 \subsubsection{Trực quan hóa Kết quả}
@@ -117,4 +127,4 @@ Các kết quả được lưu trữ trong thư mục \texttt{train\_results}:
 \end{itemize}
 
 \subsection{Kết luận}
-Mô hình Random Forest đã được triển khai thành công với quy trình xử lý dữ liệu toàn diện và kỹ thuật feature engineering tiên tiến. Các kết quả được lưu trữ và trực quan hóa đầy đủ, cho phép phân tích sâu về hiệu suất của mô hình. Việc sử dụng các đặc trưng tương tác và đặc trưng thời gian đã góp phần cải thiện độ chính xác của dự đoán nồng độ CO trong không khí.
+Mô hình Random Forest đã được triển khai thành công với quy trình xử lý dữ liệu toàn diện và kỹ thuật feature engineering tiên tiến. Mô hình đạt được độ chính xác rất cao với R² = 0.9992, cho thấy khả năng dự đoán gần như hoàn hảo. Các đặc trưng tương tác và đặc trưng thời gian đã góp phần quan trọng trong việc cải thiện độ chính xác của dự đoán nồng độ CO trong không khí. Kết quả này cho thấy mô hình Random Forest là một lựa chọn phù hợp cho bài toán dự đoán chất lượng không khí.
